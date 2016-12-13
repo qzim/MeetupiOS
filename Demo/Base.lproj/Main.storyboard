@@ -38,14 +38,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JPc-Ii-Ebn">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="JPc-Ii-Ebn">
                                 <rect key="frame" x="16" y="64" width="343" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoN-tA-7S5">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="603"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="301.5"/>
                                         <state key="normal" title="Search"/>
                                         <connections>
                                             <segue destination="e21-9W-iaR" kind="show" id="DPF-XG-bPi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Je7-VP-Z52">
+                                        <rect key="frame" x="0.0" y="301.5" width="343" height="301.5"/>
+                                        <state key="normal" title="New items"/>
+                                        <connections>
+                                            <segue destination="ntA-Qr-H9K" kind="show" id="iNd-0f-6WV"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -111,6 +118,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWo-V9-Ff2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="441" y="-407"/>
+        </scene>
+        <!--New items-->
+        <scene sceneID="9vN-l9-PpK">
+            <objects>
+                <viewController title="New items" automaticallyAdjustsScrollViewInsets="NO" id="ntA-Qr-H9K" customClass="NewItemViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="19B-x6-Yud"/>
+                        <viewControllerLayoutGuide type="bottom" id="eju-UL-yhf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="00k-LZ-HEt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Caz-vA-wJV">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newReuseIdentifier" id="ASA-qB-557">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ASA-qB-557" id="ZfB-gG-8Lw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ntA-Qr-H9K" id="fhu-I1-B7e"/>
+                                    <outlet property="delegate" destination="ntA-Qr-H9K" id="XQz-oy-rfq"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Caz-vA-wJV" firstAttribute="leading" secondItem="00k-LZ-HEt" secondAttribute="leading" id="HON-zG-5xL"/>
+                            <constraint firstAttribute="trailing" secondItem="Caz-vA-wJV" secondAttribute="trailing" id="cZn-CP-c75"/>
+                            <constraint firstItem="Caz-vA-wJV" firstAttribute="top" secondItem="19B-x6-Yud" secondAttribute="bottom" id="dgc-i7-W7Z"/>
+                            <constraint firstItem="eju-UL-yhf" firstAttribute="top" secondItem="Caz-vA-wJV" secondAttribute="bottom" id="oUt-Qq-5cB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Caz-vA-wJV" id="Ema-dl-d5z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qIz-h3-vvh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="441" y="313"/>
         </scene>
     </scenes>
 </document>

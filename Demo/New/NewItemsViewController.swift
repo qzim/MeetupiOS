@@ -5,10 +5,10 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class NewItemViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView?
-    var items: [SearchItemModel]? {
+    var items: [NewItemModel]? {
         didSet {
             tableView!.reloadData()
         }
@@ -17,14 +17,14 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SearchItemsClient.fetchItems {
-            (items: [SearchItemModel]) in
+        NewItemsClient.fetchItems {
+            (items: [NewItemModel]) in
             self.items = items
         }
     }
 }
 
-extension SearchViewController: UITableViewDataSource {
+extension NewItemViewController: UITableViewDataSource {
 
     //MARK: UITableViewDataSource
 
@@ -36,9 +36,9 @@ extension SearchViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchReuseIdentifier", for: indexPath);
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newReuseIdentifier", for: indexPath);
         if let textLabel = cell.textLabel {
-            textLabel.text = "\(indexPath.row): Search item"
+            textLabel.text = "\(indexPath.row): New item"
         }
         return cell
     }

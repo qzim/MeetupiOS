@@ -5,7 +5,7 @@
 
 import Foundation
 
-class SearchClient {
+class SearchItemsClient {
 
     public static func fetchItems(completion: (_: [SearchItemModel]) -> Void) {
         var array = [SearchItemModel]()
