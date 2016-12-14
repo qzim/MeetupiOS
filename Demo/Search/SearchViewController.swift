@@ -7,19 +7,18 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    let collection = HeterogeneousCollection(with: SearchStrategy())
+
     @IBOutlet weak var tableView: UITableView?
-    var items: [SearchItemModel]? {
-        didSet {
-            tableView!.reloadData()
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SearchItemsClient.fetchItems {
-            (items: [SearchItemModel]) in
-            self.items = items
+        collection.register(proxyClass: AdProxy.self, for: AdModel.self)
+        collection.register(proxyClass: SearchItemProxy.self, for: SearchItemModel.self)
+
+        collection.fetch { _ in
+            tableView!.reloadData()
         }
     }
 }
@@ -29,17 +28,11 @@ extension SearchViewController: UITableViewDataSource {
     //MARK: UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let items = items else {
-            return 0
-        }
-        return items.count
+        return collection.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchReuseIdentifier", for: indexPath);
-        if let textLabel = cell.textLabel {
-            textLabel.text = "\(indexPath.row): Search item"
-        }
-        return cell
+        let proxy = collection.proxy(at: indexPath.row)
+        return proxy.tableView(tableView, cellForRowAt: indexPath)
     }
 }

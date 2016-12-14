@@ -5,5 +5,5 @@
 
 import Foundation
 
-class NewItemModel: Model {
+class AdModel: Model {
 }

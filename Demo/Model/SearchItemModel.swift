@@ -5,5 +5,5 @@
 
 import Foundation
 
-class SearchItemModel {
+class SearchItemModel: Model {
 }

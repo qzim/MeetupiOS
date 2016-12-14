@@ -7,19 +7,18 @@ import UIKit
 
 class NewItemViewController: UIViewController {
 
+    let collection = HeterogeneousCollection(with: NewItemStrategy())
+
     @IBOutlet weak var tableView: UITableView?
-    var items: [NewItemModel]? {
-        didSet {
-            tableView!.reloadData()
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NewItemsClient.fetchItems {
-            (items: [NewItemModel]) in
-            self.items = items
+        collection.register(proxyClass: AdProxy.self, for: AdModel.self)
+        collection.register(proxyClass: NewItemProxy.self, for: NewItemModel.self)
+
+        collection.fetch { _ in
+            tableView!.reloadData()
         }
     }
 }
@@ -29,17 +28,11 @@ extension NewItemViewController: UITableViewDataSource {
     //MARK: UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let items = items else {
-            return 0
-        }
-        return items.count
+        return collection.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newReuseIdentifier", for: indexPath);
-        if let textLabel = cell.textLabel {
-            textLabel.text = "\(indexPath.row): New item"
-        }
-        return cell
+        let proxy = collection.proxy(at: indexPath.row)
+        return proxy.tableView(tableView, cellForRowAt: indexPath)
     }
 }

@@ -5,5 +5,6 @@
 
 import Foundation
 
-class NewItemModel: Model {
+protocol Model {
+
 }
